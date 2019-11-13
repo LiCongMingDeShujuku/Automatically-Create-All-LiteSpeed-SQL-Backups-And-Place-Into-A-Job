@@ -42,10 +42,10 @@ use master;
 set quoted_identifier off
 set nocount on
  
-declare @sql_instance 					varchar(255)
+declare @sql_instance 				varchar(255)
 declare @server_name 				varchar(255)
 declare @full_backup 				varchar(255)
-declare @log_backup 					varchar(255)
+declare @log_backup 				varchar(255)
 declare @diff_backup 				varchar(255)
 declare @backup_time_stamp 			varchar(255)
 declare @backup_location 			varchar(255) 
@@ -54,10 +54,10 @@ declare @create_folder_backup_type 	varchar(max)
 declare @backup_database 			varchar(max)
  
 set @full_backup 	= 'Full'
-set @log_backup 		= 'Log'
+set @log_backup 	= 'Log'
 set @diff_backup 	= 'Diff'
 set @server_name 	= ( select @@server_name )
-set @sql_instance 		= ( select left(@@server_name, charindex('\', @@server_name) +50) )
+set @sql_instance 	= ( select left(@@server_name, charindex('\', @@server_name) +50) )
 set @backup_time_stamp = ( select replace(replace(replace(replace(replace(convert(varchar,getdate(), 9),' ',' '),':','-'),' ',' ' ), 'pm', ' pm'), 'am', ' am') ) set @backup_location = '\\MyBackupShare\MyBackupFolder\' set @backup_database = ''
 exec master..sp_configure 'show advanced options',	'1' reconfigure
 exec master..sp_configure 'xp_cmdshell', 			'1' reconfigure
